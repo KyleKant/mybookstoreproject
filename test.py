@@ -303,8 +303,39 @@ def GuessNumber(first: int, last: int):
 
         # end try
 # GuessNumber(1, 2)
+
+
 # Email, Password Validation
 
 
 def user_validate(email: str, password: str):
-    email_pattern = re.compile()
+    """User Validation
+
+    Args:
+        email (str): Email address of user
+        password (str): Password of user
+
+    Returns:
+        'User Valid': Email and Password is valid
+        'Password Invalid': Email is valid but Password is invalid
+        'Email InValid': Password is valid but Email is invalid
+        'User Invalid': Both Email and Password is invalid
+    """
+    email_pattern = re.compile(
+        r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
+    password_pattern = re.compile(
+        r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,20}$')
+    valid_email = re.fullmatch(email_pattern, email)
+    valid_password = re.fullmatch(password_pattern, password)
+    if valid_email != None and valid_password != None:
+        return 'User Valid'
+    elif valid_email != None and valid_password == None:
+        return 'Password Invalid'
+    elif valid_email == None and valid_password != None:
+        return 'Email Invalid'
+    else:
+        return 'User Invalid'
+    # return (valid_email, valid_password)
+
+
+print(user_validate('thi@thi.com.vn', '1234asdJASsda@!#2'))
