@@ -1,5 +1,6 @@
 asgiref==3.5.2
 asttokens==2.1.0
+attrs==22.1.0
 autopep8==2.0.0
 backcall==0.2.0
 colorama==0.4.6
@@ -11,11 +12,12 @@ django-resized==0.3.11
 django-widget-tweaks==1.4.8
 entrypoints==0.4
 executing==1.2.0
+iniconfig==1.1.1
 ipykernel==6.17.0
 ipython==8.6.0
 jedi==0.18.1
-jupyter-client==7.4.4
-jupyter-core==4.11.2
+jupyter_client==7.4.4
+jupyter_core==4.11.2
 Markdown==3.3.4
 matplotlib-inline==0.1.6
 nest-asyncio==1.5.6
@@ -23,6 +25,7 @@ packaging==21.3
 parso==0.8.3
 pickleshare==0.7.5
 Pillow==9.3.0
+pluggy==1.0.0
 prompt-toolkit==3.0.32
 psutil==5.9.3
 psycopg2==2.8.6
@@ -30,6 +33,7 @@ pure-eval==0.2.2
 pycodestyle==2.9.1
 Pygments==2.13.0
 pyparsing==3.0.9
+pytest==7.2.0
 python-dateutil==2.8.2
 pytz==2021.1
 pywin32==305

@@ -1,5 +1,5 @@
 # print a tree
-
+import re
 import random
 import sys
 from time import time
@@ -302,4 +302,9 @@ def GuessNumber(first: int, last: int):
             print(f'Please enter a number')
 
         # end try
-GuessNumber(1, 2)
+# GuessNumber(1, 2)
+# Email, Password Validation
+
+
+def user_validate(email: str, password: str):
+    email_pattern = re.compile()
