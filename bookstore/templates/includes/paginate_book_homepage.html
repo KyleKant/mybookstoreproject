@@ -1,0 +1,75 @@
+
+<nav class="mb-4" nav-label="Chapters pagination">
+	<ul class="pagination justify-content-center">
+		{% if page_obj.number > 1 %}
+		    <li class="page-item">
+		    	<a href="?page=1" class="page-link" aria-label="First">
+		    		<i class="bi bi-chevron-double-left"></i>
+		    	</a>
+		    </li>
+		{% else %}
+		    <li class="page-item disabled">
+		    		<i class="bi bi-chevron-double-left page-link" aria-label="First"></i>
+		    </li>
+		{% endif %}
+		{% if page_obj.has_previous %}
+		    <li class="page-item">
+		    	<a href="?page={{page_obj.previous_page_number}}" class="page-link" aria-label="Previous">
+		    		<i class="bi bi-chevron-left"></i>
+		    	</a>
+		    </li>
+		{% else %}
+		    <li class="page-item disabled">
+		    	<i class="bi bi-chevron-left page-link" aria-label="Previous"></i>
+		    </li>
+		{% endif %}
+		{% for page_num in paginator.page_range %}
+			{% if page_obj.number == page_num %}
+			    <li class="page-item active">
+			    	<a href="?page={{page_num}}" class="page-link">{{ page_num }}</a>
+			    	<span class="sr-only">(Currently)</span>
+			    </li>
+			{% else %}
+			    <li class="page-item">
+					<a href="?page={{page_num}}" class="page-link">{{ page_num }}</a>
+				</li>
+			{% endif %}
+		{% endfor %}
+		{% if page_obj.has_next %}
+		    <li class="page-item">
+		    	<a href="?page={{page_obj.next_page_number}}" class="page-link" aria-label="Next">
+		    		<i class="bi bi-chevron-right"></i>
+		    	</a>
+		    </li>
+		{% else %}
+			<li class="page-item disabled">
+	    		<i class="bi bi-chevron-right page-link" aria-label="Next"></i>
+			</li>
+		{% endif %}
+		{% if page_obj.number != paginator.num_pages %}
+		    <li class="page-item">
+		    	<a href="?page={{paginator.num_pages}}" class="page-link" aria-label="Last">
+		    		<i class="bi bi-chevron-double-right"></i>
+		    	</a>
+		    </li>
+		{% else %}
+		    <li class="page-item disabled">
+	    		<i class="bi bi-chevron-double-right page-link" aria-label="Last"></i>
+		    </li>
+		{% endif %}
+		<div class="dropdown dropup bg-light">
+			<a class="btn dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Choose Page</a>
+			<ul id="choose-page-dropdown-menu" class="dropdown-menu bg-light" aria-labelledby="navbarDropdown">
+				<form action="#index" name="page_jump" id="page_jump" class="form-group" method="get">
+					<div class="input-group">
+						<input type="number" name="page" class="form-control" placeholder="Page number..." value>
+						<span class="input-group-btn">
+							<button class="btn btn-secondary" type="submit">Go</button>
+						</span>
+					</div>
+				</form>
+			</ul>
+		</div>
+	</ul>
+	
+</nav>

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Book Store - {{ book.name_book}}
+{% endblock title %}
+
+{% block content %}
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'my_books' %}" class="text-color"><i class="bi bi-house-fill"></i>My Books</a></li>
+			<li class="breadcrumb-item active text-color" aria-current="page">{{ book.name_book }}</li>
+		</ol>
+	</nav>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-10">
+				{% if request.user.is_authenticated %}
+					<div class="col-sm">
+						<div class="row">
+							<div class="col-sm">
+								<img src="{{ book.illumination.url }}" alt="{{ book.name_book }}" class="">
+							</div>
+							<div class="col-sm">
+								<div class="row">
+									<a href="{% url 'book_homepage' book.slug %}" class=""><h2 class="text-color">{{ book.name_book }}</h2></a>
+								</div>
+								<div class="row">
+									<a href="#" class="text-color my-2"><i class="bi bi-person-badge"></i> Author: {{ book.author }}</a>
+								</div>
+								<div class="row">
+									<a href="#" class="text-color my-2"><i class="bi bi-tag-fill"></i> Category: {{ book.category }}</a>
+								</div>
+								<div class="row">
+									<a href="#" class="text-color my-2"><i class="bi bi-info-circle-fill"></i></i> Status: {{ book.status }}</a>
+								</div>
+								<div class="row">
+									<a href="#" class="text-color my-2"><i class="bi bi-bar-chart-fill"></i> Length: {{ book.get_chapters_count }} chapters</a>
+								</div>
+								<div class="row d-flex my-2 justify-content-between">
+									<div class="col-md-auto px-0 text-center"><a class="mucluc rounded-pill text-color" href="#summary">Summary</a></div>
+									<div class="col-md-auto px-0 text-center"><a class="mucluc rounded-pill text-color" href="#index">Index</a></div>
+									<div class="col-md-auto px-0 text-center"><a class="mucluc rounded-pill text-color" href="#comment">Comment</a></div>
+								</div>
+								{% if chapters %}
+								    <div class="row justify-content-between">
+										<div class="col-md-auto my-2 px-0">
+											<a href="{% url 'chapter_content' book.slug first_chapter.slug_chapter %}" class="mucluc-red rounded-pill text-center text-color">Read From Begin</a>
+										</div>
+										<div class="col-md-auto my-2 px-0">
+											<a href="{% url 'chapter_content' book.slug last_chapter.slug_chapter %}" class="mucluc-red rounded-pill text-center text-color">Read From End</a>
+										</div>
+									</div>
+								{% endif %}
+							</div>
+						</div>
+						<div class="row">
+							<h3 id="summary" class="text-color">Summary about {{book.name_book}}</h3>
+							<div class="text-color">
+								{{ book.get_content_summary_as_markdown }}
+							</div>
+						</div>
+						<div class="row">
+							<h3 id="index" class="text-color">Index</h3>
+							{% for chapter in page_obj %}
+								{% if chapter %}
+								    <a href="{% url 'chapter_content' book.slug chapter.slug_chapter %}" class="text-color">{{ chapter.name_chapter }}</a>
+								{% endif %}
+							{% endfor %}
+						</div>
+						{% include 'includes/paginate_book_homepage.html' %}
+					</div>
+				{% endif %}
+			</div>
+			<div class="col-md-auto">
+				<div class="row justify-content-center">
+					<div class="col-md-auto px-1 mb-2">
+						<a id="upload_chapter" href="{% url 'upload_chapter' book.slug %}" class="btn btn-success text-color">Upload Chapter</a>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-md-auto px-1 my-2">
+						<a id="update_book" href="{% url 'update_book' book.slug %}" class="btn btn-success text-color">Update Book</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

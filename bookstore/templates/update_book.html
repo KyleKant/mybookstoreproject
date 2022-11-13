@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Update
+{% endblock title %}
+
+{% block stylesheet %}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock stylesheet %}
+
+{% block javascript %}
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+	<script>
+		var simplemde = new SimpleMDE();
+	</script>
+{% endblock javascript %}
+
+{% block content %}
+	<form action="" method="post" class="" novalidate="">
+		{% csrf_token %}
+		{% include 'includes/form.html' %}
+		<button class="btn btn-success text-color">Save</button>
+		<a href="{% url 'book_homepage' book.slug %}" class="btn btn-secondary text-color">Cancel</a>
+	</form>
+{% endblock content %}

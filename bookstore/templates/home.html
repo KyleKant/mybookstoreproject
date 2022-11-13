@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Books Store
+{% endblock title %}
+
+{% block content %}
+	<div class="container">
+		<div class="row justify-content-center">
+			{% for book in page_obj %}
+				<div class="col-md-5 my-3 mx-3 text-center">
+					<div class="row">
+						<a href="{% url 'book_homepage' book.slug %}" class="text-color">
+							<img class="py-2" src="{{ book.illumination.url }}" height="280" width="200" alt="book.name_book" title="{{ book.name_book }}
+
+{{ book.author }}
+
+{{ book.content_summary }}">
+							<br>
+							{{ book.name_book }}
+						</a>
+					</div>
+				</div>
+					
+			{% endfor %}
+		</div>
+		<div class="row">
+			{% include 'includes/paginate.html' %}
+		</div>
+	</div>
+{% endblock content %}

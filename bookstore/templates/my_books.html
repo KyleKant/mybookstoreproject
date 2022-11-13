@@ -1,0 +1,47 @@
+{% extends "base.html" %} 
+{% block title %} Books Store - My Books {% endblock title %} 
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{% url 'home' %}" class="text-color">
+        <i class="bi bi-house-fill"></i>Home</a
+      >
+    </li>
+  </ol>
+</nav>
+<div class="container">
+  <div class="row justify-context-between">
+    <div class="col-9">
+      {% if request.user.is_authenticated %}
+      <div class="row justify-content-center">
+        {% if page_obj %}
+          {% for book in page_obj %}
+          <div class="col-md-auto text-center my-2 mx-2">
+            <a href="{% url 'book_homepage' book.slug %}" class="px-2 py-2">
+              <img
+                src="{{ book.illumination.url }}"
+                width="300"
+                height="400"
+                alt="book.name_book"
+                class="px-2 py-2"
+                title="{{ book.name_book }} {{ book.author }} {{ book.content_summary }}"
+              />
+              <div class="text-color">{{ book.name_book }}</div>
+            </a>
+          </div>
+          {% endfor %}
+        {% else %}
+          <h1>Your Book store is empty</h1>
+        {% endif %}
+      </div>
+      {% include 'includes/paginate.html' %} {% endif %}
+    </div>
+    <div class="col-2">
+      <a href="{% url 'upload_book' %}" class="btn btn-success text-color"
+        >Upload Book</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock content %}

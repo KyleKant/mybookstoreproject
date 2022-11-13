@@ -1,0 +1,158 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	{# <meta http-equiv="refresh" content="2"> #}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %} Books Store {% endblock title %}</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Peralta">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/app.css' %}">
+	{% block stylesheet %}
+	{% endblock stylesheet %}
+</head>
+<body class="bg-dark">
+	{% block body %}
+		<nav id="top" class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid justify-content-between">
+				<a class="navbar-brand" title="Homepage" href="{% url 'home' %}">
+					<img class="img-logo" src="/static/img/book_icon_1.png" width="38" height="38" alt="Homepage">
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active logo" aria-current="page" href="{% url 'home' %}"><h3>Books Store</h3></a>
+						</li>
+						<li class="nav-item dropdown mt-1">
+							<a class="nav-link active dropdown-toggle text-color" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
+							<ul id="dropdown-menu" class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+								<li><a href="#" class="dropdown-item">Novel</a></li>
+								<li><a href="#" class="dropdown-item">Science and Technology</a></li>
+								<li><a href="#" class="dropdown-item">Soft Skills</a></li>
+							</ul>
+						</li>
+						<li class="nav-item mt-1">
+							<a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+						</li>
+					</ul>
+					<form class="d-flex">
+						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+						<button class="btn btn-outline-success me-2 text-color" type="submit" action="{% url 'my_books' %}">Search</button>
+					</form>
+					{% if user.is_authenticated %}
+					    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item dropdown">
+							    <a href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="nav-link acctive dropdown-toggle text-color">
+									{{ user.username }}
+								</a>
+								<ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item" href="{% url 'my_account' %}">My account</a></li>
+									<li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+									<li><a class="dropdown-item" href="{% url 'my_books' %}">My Books</a></li>
+									<li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+								</ul>
+							</li>
+						</ul>
+					{% else %}
+					    <form action="" class="d-flex">
+							<a href="{% url 'login' %}" class="btn btn-outline-success text-color me-2">Log in</a>
+							<a href="{% url 'signup' %}" class="btn btn-success text-color">Sign up</a>
+						</form>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+
+		{% block content %}
+			
+		{% endblock content %}
+	{% endblock body %}
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+	{% block javascript %}
+		
+	{% endblock javascript %}
+</body>
+<footer class="bg-dark text-center text-lg-start text-color">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h6 class="text-uppercase">Footer Content</h6>
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+          voluptatem veniam, est atque cumque eum delectus sint!
+        </p>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Links</h5>
+
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="#!" class="text-color">Link 1</a>
+          </li>
+          <li>
+            <a href="#!" class="text-color">Link 2</a>
+          </li>
+          <li>
+            <a href="#!" class="text-color">Link 3</a>
+          </li>
+          <li>
+            <a href="#!" class="text-color">Link 4</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-0">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!" class="text-color">Link 1</a>
+          </li>
+          <li>
+            <a href="#!" class="text-color">Link 2</a>
+          </li>
+          <li>
+            <a href="#!" class="text-color">Link 3</a>
+          </li>
+          <li>
+            <a href="#!" class="text-color">Link 4</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2020 Copyright:
+    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+</html>

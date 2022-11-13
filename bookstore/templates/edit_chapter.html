@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+	{{ book.name_book }} - {{ chapter.name_chapter }} - Edit Chapter
+{% endblock title %}
+
+{% block stylesheet %}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock stylesheet %}
+
+{% block javascript %}
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+	<script>
+		var simplemde = new SimpleMDE();
+	</script>
+{% endblock javascript %}
+
+{% block content %}
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'my_books' %}" class="text-color">My Books</a></li>
+			<li class="breadcrumb-item"><a href="{% url 'book_homepage' book.slug %}" class="text-color">{{ book.name_book }}</a></li>
+			<li class="breadcrumb-item" aria-current="page"><a href="{% url 'chapter_content' book.slug chapter.slug_chapter %}" class="text-color">{{ chapter.name_chapter }}</a></li>
+		</ol>
+	</nav>
+	<div class="container">
+		<form action="" method="post" class="" novalidate="">
+			{% csrf_token %}
+			{% include "includes/form.html" %}
+			<button class="btn btn-success text-color" type="submit">Save</button>
+			<a href="{% url 'chapter_content' book.slug chapter.slug_chapter %}" class="btn btn-primary text-color">Cancel</a>
+		</form>
+	</div>
+{% endblock content %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{book.name_book}}-{{current_chapter.name_chapter}}
+{% endblock title %}
+
+{% block content %}
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="{% url 'my_books' %}" class="text-color">
+					<i class="bi bi-house-fill"></i>My Books
+				</a>
+			</li>
+			<li class="breadcrumb-item text-color"><a href="{% url 'book_homepage' book.slug %}" class="text-color">{{ book.name_book }}</a></li>
+			<li class="breadcrumb-item active text-color" aria-current="page">{{ current_chapter.name_chapter }}</li>
+		</ol>
+	</nav>
+	<div class="container">
+		<div class="position-relative">
+			<a href="{% url 'edit_chapter' book.slug current_chapter.slug_chapter %}" class="btn btn-success text-color position-absolute end-0">Edit Chapter</a>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col col-md-auto pe-0">
+				{% if previous_chapter != current_chapter %}
+		        	<a href="{% url 'chapter_content' book.slug previous_chapter.slug_chapter %}" class="btn btn-success text-center text-color">
+						<i class="bi bi-chevron-left"></i>Prev Chapter
+					</a>
+				{% else %}
+				    <button class="btn btn-success text-color disabled"><i class="bi bi-chevron-left"></i>Prev Chapter</button>
+				{% endif %}
+			</div>
+			<div id="index" class="col col-md-auto px-1">
+				<div class="dropdown bg-green">
+					<a class="btn btn-success dropdown-toggle text-color" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ current_chapter.name_chapter }}</a>
+					<ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
+						{% for chapter in chapters %}
+							<li><a href="{% url 'chapter_content' book.slug chapter.slug_chapter %}" class="dropdown-item">{{ chapter.name_chapter }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="col col-md-auto ps-0">
+				{% if next_chapter != current_chapter %}
+				    <a href="{% url 'chapter_content' book.slug next_chapter.slug_chapter%}" class="btn btn-success text-center text-color">Next Chapter<i class="bi bi-chevron-right"></i></a>
+				{% else %}
+				    <button class="btn btn-success text-color disabled">Next Chapter<i class="bi bi-chevron-right"></i></button>
+				{% endif %}
+			</div>
+		</div>
+		<div class="title">
+			<h2 class="text-center text-color">{{ current_chapter.name_chapter }}</h2>
+		</div>
+		<div class="content text-color">
+			{{current_chapter.get_content_as_markdown}}
+		</div>
+		<div class="position-relative">
+			<a rel="nofollow" href="#top" class="btn btn-success text-color position-absolute end-0" arial-label="Back to Top" title="Back to Top">Top</a>
+		</div>
+		<div class="row justify-content-center mb-4">
+			<div class="col col-md-auto pe-0">
+				{% if previous_chapter != current_chapter %}
+		        	<a href="{% url 'chapter_content' book.slug previous_chapter.slug_chapter %}" class="btn btn-success text-center text-color"><i class="bi bi-chevron-left"></i>Prev Chapter</a>
+				{% else %}
+				    <button class="btn btn-success text-color disabled"><i class="bi bi-chevron-left"></i>Prev Chapter</button>
+				{% endif %}
+			</div>
+			<div id="index" class="col col-md-auto px-1">
+				<div class="dropdown dropup">
+					<a class="btn btn-success dropdown-toggle text-color" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ current_chapter.name_chapter }}</a>
+					<ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
+						{% for chapter in chapters %}
+							<li><a href="{% url 'chapter_content' book.slug chapter.slug_chapter %}" class="dropdown-item">{{ chapter.name_chapter }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="col col-md-auto ps-0">
+				{% if next_chapter != current_chapter %}
+				    <a href="{% url 'chapter_content' book.slug next_chapter.slug_chapter%}" class="btn btn-success text-center text-color">Next Chapter<i class="bi bi-chevron-right"></i></a>
+				{% else %}
+				    <button class="btn btn-success text-color disabled">Next Chapter<i class="bi bi-chevron-right"></i></button>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}
