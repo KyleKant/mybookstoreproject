@@ -286,23 +286,38 @@ def total(*args):
 # input('What your answer?')
 # print(f'random number {ran_num}')
 # Game guess a number
+def get_random_number(first: int, last: int):
+    return random.randint(int(first), int(last))
+
+
+def get_number_entered(first: int, last: int):
+    return int(input(f'Please enter a number from {first} ~ {last}: '))
+
+
+def check_guess(guess: int, answer: int, first: int, last: int):
+    if int(guess) >= first and int(guess) <= last:
+        if int(guess) == int(answer):
+            return True
+    return False
+
+
 def GuessNumber(first: int, last: int):
-    random_number = random.randint(first, last)
+    answer = get_random_number(first, last)
+    print(answer)
     while True:
         try:
-            answer = int(
-                input(f'Please enter a number from {first} to {last}: '))
-            if answer >= first and answer <= last:
-                if answer == random_number:
-                    print("You a genius")
-                    break
-                else:
-                    continue
+            guess = get_number_entered(first, last)
+            if check_guess(guess, answer, first, last):
+                return 'You are a genius'
+                # break
+                # else:
+                #     continue
         except ValueError as err:
             print(f'Please enter a number')
 
         # end try
-# GuessNumber(1, 2)
+# if __name__ == '__main__':
+#     print(GuessNumber(1, 10))
 
 
 # Email, Password Validation
@@ -338,4 +353,4 @@ def user_validate(email: str, password: str):
     # return (valid_email, valid_password)
 
 
-print(user_validate('thi@thi.com.vn', '1234asdJASsda@!#2'))
+# print(user_validate('thi@thi.com.vn', '1234asdJASsda@!#2'))
