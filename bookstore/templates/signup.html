@@ -1,32 +1,26 @@
-{% extends "account_base.html" %}
-
-{% block title %}
-	Books Store - Create Account
-{% endblock title %}
-
-{% block content %}
-	<div class="row justify-content-center">
-		<div class="col-lg-10">
-			<div class="card bg-dark">
-				<div class="card-header text-center text-color">
-					<h3>Sign Up</h3>
-				</div>
-				<div class="card-body">
-					<form action="" method="post" novalidate="">
-						{% csrf_token %}
-						{% include "includes/form.html" %}
-						<div class="d-grid">
-							<button class="btn btn-success text-color">Signup</button>
-						</div>
-					</form>
-				</div>
-				<div class="card-footer justify-content-center">
-					<div class="row">
-						<p class="col-md-6 text-end text-color">Have you aready account?</p>
-						<a href="{% url 'login' %}" class="col-md-6 text-color">Login</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+{% extends "account_base.html" %} {% block title %} Books Store - Create Account
+{% endblock title %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="card bg-dark">
+      <div class="card-header text-center text-color">
+        <h3>Sign Up</h3>
+      </div>
+      <div class="card-body">
+        <form action="" method="post" novalidate="">
+          {% csrf_token %} {% include "includes/form.html" %}
+          <div class="d-grid">
+            <button class="btn btn-success text-color">Signup</button>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer justify-content-center">
+        <div class="row">
+          <p class="col-md-6 text-end text-color">Have you aready account?</p>
+          <a href="{% url 'login' %}" class="col-md-6 text-color">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

@@ -1,3 +1,4 @@
+from .forms import SignUpForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
@@ -5,8 +6,6 @@ from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
-from .forms import SignUpForm
 
 # Create your views here.
 
@@ -21,6 +20,11 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+
+def userValidate(request):
+    return render(request, 'user_validate.html')
+    pass
 
 
 @method_decorator(login_required, name='dispatch')

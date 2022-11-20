@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from books import views
+from accounts import views as acc_views
 
 
 urlpatterns = [
@@ -28,11 +29,13 @@ urlpatterns = [
     path('', views.BookListView.as_view(), name='home'),
 
     path('signup/', account_views.signup, name='signup'),
+    path('signup/user_validate/', account_views.userValidate, name='userValidate'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('login/', auth_views.LoginView.as_view(
         template_name='login.html'), name='login'),
 
-    path('settings/my_account', account_views.UserUpdateView.as_view(), name='my_account'),
+    path('settings/my_account',
+         account_views.UserUpdateView.as_view(), name='my_account'),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(
         template_name='password_reset.html',
@@ -56,13 +59,16 @@ urlpatterns = [
     ), name='password_change_done'),
 
     path('my_account/my_books/', views.MyBookListView.as_view(), name='my_books'),
-    path('my_account/my_books/upload_book/', views.upload_book, name='upload_book'),
-    path('my_account/my_books/<slug:slug>/book_homepage/', views.ChapterListView.as_view(), name='book_homepage'),
+    path('my_account/my_books/upload_book/',
+         views.upload_book, name='upload_book'),
+    path('my_account/my_books/<slug:slug>/book_homepage/',
+         views.ChapterListView.as_view(), name='book_homepage'),
     path('my_account/my_books/<slug:slug>/book_homepage/update_book/',
          views.BookUpdateView.as_view(),
          name='update_book'
          ),
-    path('my_account/my_books/<slug:slug>/book_homepage/upload_chapter/', views.upload_chapter, name='upload_chapter'),
+    path('my_account/my_books/<slug:slug>/book_homepage/upload_chapter/',
+         views.upload_chapter, name='upload_chapter'),
     path('my_account/my_books/<slug:slug>/book_homepage/<slug:slug_chapter>/',
          views.chapter_content,
          name='chapter_content'
